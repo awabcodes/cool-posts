@@ -1,1 +1,7 @@
+<app-header data-testid="header" />
+
 <router-outlet />
+
+@if (loaderService.isLoading$ | async) {
+  <app-spinner data-testid="spinner" />
+}
