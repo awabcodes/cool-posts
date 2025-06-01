@@ -1,0 +1,31 @@
+<div class="min-h-screen bg-gray-100 w-full p-2">
+  <div class="bg-white rounded-lg p-4 mb-4 lg:text-xl font-semibold shadow-md flex justify-between items-center">
+    <div>
+      @if (store.activePost()) {
+        <span data-testid="active-post-id">Active Post Id - {{ store.activePost()?.id }}</span>
+      }
+    </div>
+
+    <span data-testid="posts-count">Posts Count - {{ store.postsCount() }}</span>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-10 gap-2">
+    @for (post of store.posts(); track post.id) {
+      <app-post-card
+        data-testid="post-card"
+        [post]="post"
+        [label]="store.displayPost(post)"
+        [isActive]="store.isPostActive(post)"
+        (selectPost)="store.selectPost($event)"
+      />
+    } @empty {
+      <div data-testid="no-posts-found" class="text-gray-900">No posts found</div>
+    }
+  </div>
+
+  @if (store.serverError$ | async; as error) {
+    <div class="bg-red-400 rounded-xl p-2">
+      <span data-testid="server-error" class="text-white">{{ error.error }} - {{ error.message }}</span>
+    </div>
+  }
+</div>
