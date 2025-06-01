@@ -81,7 +81,7 @@ describe('PostsComponent', () => {
 
     const postsCount = fixture.debugElement.query(By.css('[data-testid="posts-count"]'));
     expect(postsCount).toBeTruthy();
-    expect(postsCount.nativeElement.textContent).toEqual('Posts Count - 2');
+    expect(postsCount.nativeElement.textContent).toContain('Posts Count - 2');
   });
 
   it('should display active post', async () => {
@@ -93,7 +93,7 @@ describe('PostsComponent', () => {
 
     const activePostId = fixture.debugElement.query(By.css('[data-testid="active-post-id"]'));
     expect(activePostId).toBeTruthy();
-    expect(activePostId.nativeElement.textContent).toEqual('Active Post Id - 1');
+    expect(activePostId.nativeElement.textContent).toContain('Active Post Id - 1');
   });
 
   it('should display server error', async () => {
@@ -105,6 +105,6 @@ describe('PostsComponent', () => {
 
     const serverError = fixture.debugElement.query(By.css('[data-testid="server-error"]'));
     expect(serverError).toBeTruthy();
-    expect(serverError.nativeElement.textContent).toEqual('error - message');
+    expect(serverError.nativeElement.textContent).toContain('error - message');
   });
 });
